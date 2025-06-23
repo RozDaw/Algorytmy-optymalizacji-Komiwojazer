@@ -30,3 +30,9 @@ def get_neighbors(route):
             neighbor[i], neighbor[j] = neighbor[j], neighbor[i]
             neighbors.append((neighbor, (i, j)))
     return neighbors
+
+def get_random_neighbor(solution):
+    a, b = random.sample(range(len(solution)), 2)
+    neighbor = solution[:]
+    neighbor[a], neighbor[b] = neighbor[b], neighbor[a]
+    return neighbor

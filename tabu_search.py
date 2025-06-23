@@ -1,5 +1,6 @@
 import random
 from utils import calculate_total_distance, get_neighbors, generate_initial_solution
+import matplotlib.pyplot as plt
 
 def tabu_search(distance_matrix, tenure=10, max_iterations=1000):
     n = len(distance_matrix)
@@ -9,6 +10,7 @@ def tabu_search(distance_matrix, tenure=10, max_iterations=1000):
 
     tabu_list = {}
     iteration = 0
+    cost_history = [best_cost]
 
     while iteration < max_iterations:
         neighbors = get_neighbors(current_solution)
@@ -16,6 +18,7 @@ def tabu_search(distance_matrix, tenure=10, max_iterations=1000):
 
         for neighbor, move in neighbors:
             cost = calculate_total_distance(neighbor, distance_matrix)
+            cost_history.append(cost)
             if move not in tabu_list or cost < best_cost:
                 current_solution = neighbor
                 if cost < best_cost:
@@ -24,11 +27,18 @@ def tabu_search(distance_matrix, tenure=10, max_iterations=1000):
                 tabu_list[move] = iteration + tenure
                 break
 
+
         # Usuwanie przestarzałych ruchów z listy tabu
         expired = [m for m, exp in tabu_list.items() if exp <= iteration]
         for m in expired:
             del tabu_list[m]
 
         iteration += 1
+
+    plt.plot(cost_history)
+    plt.xlabel('Iteration')
+    plt.ylabel('Cost')
+    plt.title('Zmiana kosztu w trakcie Tabu Search')
+    plt.grid(True)
 
     return best_solution, best_cost

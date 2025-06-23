@@ -1,9 +1,11 @@
+from pandas.core.nanops import disallow
+
 from utils import generate_coordinates, create_distance_matrix
 from tabu_search import tabu_search
 from optimal_solver import solve_tsp_optimal
 from visualize import plot_solution
 import matplotlib.pyplot as plt
-# from simulated_annealing import simulated_annealing  # do dodania
+from simulated_annealing import simulated_annealing  # do dodania
 
 def main():
     num_cities = 30
@@ -15,6 +17,12 @@ def main():
     print("Najlepsza trasa (Tabu Search):", tabu_best_route)
     print("Długość trasy:", tabu_best_cost)
     plot_solution(tabu_best_route, coords, title="Tabu Search", position=(50, 100))
+
+    # # Simulated annealing
+    simulated_annealing_best_route, simulated_annealing_best_cost = simulated_annealing(distance_matrix)
+    print("Najlepsza trasa (Simulated Annealing):", simulated_annealing_best_route)
+    print("Długość trasy:", simulated_annealing_best_cost)
+    plot_solution(simulated_annealing_best_route, coords, title="Simulated Annealing", position=(50, 600))
 
     optimal_route, optimal_cost = solve_tsp_optimal(distance_matrix)
     if optimal_route:
