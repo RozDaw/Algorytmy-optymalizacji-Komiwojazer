@@ -41,4 +41,6 @@ def tabu_search(distance_matrix, tenure=10, max_iterations=1000):
     plt.title('Zmiana kosztu w trakcie Tabu Search')
     plt.grid(True)
 
+    plt.show()
+
     return best_solution, best_cost

@@ -63,6 +63,8 @@ def optimize_sa_parameters(distance_matrix, initial_temp = 10000, cooling_rate =
         param_temp *= 0.995
         print(_)
 
+    plt.show()
+
     plt.figure(figsize=(10, 5))
     plt.plot(cost_history, marker='o')
     plt.title("Postęp optymalizacji parametrów (symulowane wyżarzanie parametrów)")

@@ -8,7 +8,7 @@ from tabu_search import tabu_search
 from or_tools_solver import solve_tsp_with_or_tools
 from visualize import plot_solution
 import matplotlib.pyplot as plt
-from simulated_annealing import simulated_annealing  # do dodania
+from simulated_annealing import simulated_annealing
 import time
 from simulated_annealing_optimizer import optimize_sa_parameters
 
@@ -48,6 +48,8 @@ def main():
     print("Długość trasy:", tabu_best_cost)
     plot_solution(tabu_best_route, coords, title="Tabu Search", position=(50, 100))
 
+    plt.show()
+    
     # # Simulated annealing
     simulated_annealing_best_route, simulated_annealing_best_cost = simulated_annealing(distance_matrix)
     print("Najlepsza trasa (Simulated Annealing):", simulated_annealing_best_route)
@@ -56,10 +58,10 @@ def main():
 
     or_tools_route, or_tools_cost = solve_tsp_with_or_tools(distance_matrix)
     if or_tools_route:
-        print("Optymalne rozwiązanie (OR-Tools):", or_tools_route)
+        print("OR-Tools:", or_tools_route)
         print("Długość trasy:", or_tools_cost)
 
-        plot_solution(or_tools_route, coords, title="Optimal solver", position=(1300, 100), animate=False)
+        plot_solution(or_tools_route, coords, title="OR-Tools solver", position=(1300, 100), animate=False)
     else:
         print("Nie udało się znaleźć rozwiązania optymalnego.")
 
