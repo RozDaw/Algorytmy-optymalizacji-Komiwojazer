@@ -1,9 +1,9 @@
 import math
 import random
-from utils import calculate_total_distance, get_random_neighbor, generate_initial_solution
+from utils import calculate_total_distance, get_random_neighbor, generate_initial_solution, get_neighbors
 import matplotlib.pyplot as plt
 
-def simulated_annealing(distance_matrix, initial_temperature=1000, cooling_rate=0.999, min_temperature=1e-4, max_iterations=100000):
+def simulated_annealing(distance_matrix, initial_temperature=20000, cooling_rate=0.999, min_temperature=1e-5, max_iterations=100000):
     n = len(distance_matrix)
     current_solution = generate_initial_solution(n)
     best_solution = current_solution[:]

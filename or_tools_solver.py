@@ -1,6 +1,6 @@
 from ortools.constraint_solver import pywrapcp, routing_enums_pb2
 
-def solve_tsp_optimal(distance_matrix):
+def solve_tsp_with_or_tools(distance_matrix):
     n = len(distance_matrix)
     manager = pywrapcp.RoutingIndexManager(n, 1, 0)
     routing = pywrapcp.RoutingModel(manager)
